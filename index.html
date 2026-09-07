@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>김문정 — Portfolio</title>
+  <meta name="description" content="풀스택 개발에 관심이 있는 김문정의 포트폴리오. React/Next.js 경험을 바탕으로 Python과 AI 도구까지 다루는 범위를 넓히고 있습니다." />
+
+  <!-- Pretendard(본문): 성분핏과 동일한 dynamic subset CDN -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+  <!-- Gmarket Sans(제목)는 css/style.css의 @font-face로 로드 -->
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ===== Header / Nav ===== -->
+  <header class="site-header" id="siteHeader">
+    <nav class="navbar">
+      <a href="#home" class="logo">Moon</a>
+
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="다크 모드 전환" aria-pressed="false">
+          <svg class="icon-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+        </button>
+
+        <button class="hamburger" id="hamburgerBtn" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- 모바일 우측 슬라이드 메뉴 -->
+    <div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
+    <nav class="mobile-menu" id="mobileMenu" aria-label="모바일 메뉴">
+      <button class="mobile-menu-close" id="mobileMenuClose" aria-label="메뉴 닫기">✕</button>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#skills" class="nav-link">Skills</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===== Hero ===== -->
+    <section id="home" class="hero">
+      <div class="hero-mesh" aria-hidden="true"></div>
+      <div class="hero-particles" id="heroParticles" aria-hidden="true"></div>
+
+      <div class="hero-inner">
+        <h1 class="hero-title reveal">
+          안녕하세요,<br />
+          AI를 더하는 풀스택 개발자<br />
+          <span class="name-highlight">김문정</span>입니다.
+        </h1>
+        <p class="hero-type" id="heroTyping" aria-live="polite"></p>
+        <div class="hero-actions reveal">
+          <a href="#projects" class="btn btn-primary">Projects 보기</a>
+          <a href="#contact" class="btn btn-outline">Contact</a>
+        </div>
+      </div>
+
+      <a href="#about" class="hero-scroll-hint" aria-label="아래로 스크롤">
+        <span></span>
+      </a>
+    </section>
+
+    <!-- ===== About ===== -->
+    <section id="about" class="about">
+      <div class="section-head reveal">
+        <h2>About Me</h2>
+        <p>지금 어디쯤 와 있는지 짧게 소개할게요.</p>
+      </div>
+
+      <div class="about-grid reveal">
+        <div class="about-media">
+          <img src="images/profile.svg" alt="김문정 프로필, 이니셜 M이 담긴 아바타" class="profile-img" />
+          <p class="about-role">계속 배우는 중</p>
+        </div>
+        <div class="about-content">
+          <p>
+            새로운 걸 배우고 직접 만들어보는 과정을 좋아합니다. 코드를 통해
+            아이디어가 실제로 동작하는 결과물이 되는 걸 보는 게 재미있습니다.
+          </p>
+          <p>
+            모르는 문제는 일단 부딪혀보고, 막히는 부분은 꾸준히 채워나가며 배우는 편입니다.
+            완벽한 계획보다 꾸준함을 더 믿습니다.
+          </p>
+          <ul class="about-facts">
+            <li><span class="fact-label">소속</span><span>코디세이(Codyssey) AI 올인원 2기</span></li>
+            <li><span class="fact-label">관심 분야</span><span>풀스택 개발 · AI 도구 활용</span></li>
+            <li><span class="fact-label">방식</span><span>직접 만들어보며 배운다</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Skills ===== -->
+    <section id="skills" class="skills">
+      <div class="section-head reveal">
+        <h2>Skills</h2>
+        <p>지금까지 써본 도구와, 지금 배우고 있는 도구입니다.</p>
+      </div>
+      <div class="skills-grid">
+        <article class="skill-group reveal">
+          <span class="skill-icon">🖥️</span>
+          <h3>Frontend</h3>
+          <ul class="tag-list">
+            <li>HTML</li><li>CSS</li><li>JavaScript</li><li>TypeScript</li><li>React</li><li>Next.js</li>
+          </ul>
+        </article>
+        <article class="skill-group reveal">
+          <span class="skill-icon">🗄️</span>
+          <h3>Backend &amp; DB</h3>
+          <ul class="tag-list">
+            <li>Node.js</li><li>Express</li><li>MySQL</li><li>Oracle</li><li>Supabase</li>
+          </ul>
+        </article>
+        <article class="skill-group reveal">
+          <span class="skill-icon">☁️</span>
+          <h3>Cloud &amp; Tools</h3>
+          <ul class="tag-list">
+            <li>AWS</li><li>GCP</li><li>Vercel</li><li>Git / GitHub</li><li>Figma</li>
+          </ul>
+        </article>
+        <article class="skill-group reveal">
+          <span class="skill-icon">🌱</span>
+          <h3>지금 배우는 중</h3>
+          <ul class="tag-list tag-list-learning">
+            <li>Python</li><li>AI 도구 활용</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== Projects ===== -->
+    <section id="projects" class="projects">
+      <div class="section-head reveal">
+        <h2>Projects</h2>
+        <p>GitHub API로 불러온 최신 저장소입니다.</p>
+      </div>
+
+      <div class="filter-bar" id="filterBar" hidden></div>
+
+      <p class="projects-status" id="projectsStatus" role="status" aria-live="polite"></p>
+      <div class="projects-grid" id="projectsGrid"></div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section id="contact" class="contact">
+      <div class="section-head reveal">
+        <h2>Contact</h2>
+        <p>궁금한 점이나 협업 제안이 있다면 남겨주세요.</p>
+      </div>
+
+      <form class="contact-form reveal" id="contactForm" novalidate>
+        <div class="form-row">
+          <label for="name">이름</label>
+          <input type="text" id="name" name="name" autocomplete="name" />
+          <p class="error-msg" id="nameError"></p>
+        </div>
+
+        <div class="form-row">
+          <label for="email">이메일</label>
+          <input type="email" id="email" name="email" autocomplete="email" />
+          <p class="error-msg" id="emailError"></p>
+        </div>
+
+        <div class="form-row">
+          <label for="message">메시지</label>
+          <textarea id="message" name="message" rows="4"></textarea>
+          <p class="error-msg" id="messageError"></p>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">보내기</button>
+        <p class="form-success" id="formSuccess" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> 김문정. All rights reserved.</p>
+    <div class="social-links">
+      <a href="https://github.com/segretoo" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </footer>
+
+  <button id="scrollTopBtn" class="scroll-top" aria-label="맨 위로 이동">↑</button>
+
+  <!-- 보너스: 폼 실제 전송용 EmailJS SDK (js/main.js에서 사용, 계정 연결은 README 참고) -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
