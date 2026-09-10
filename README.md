@@ -1,9 +1,16 @@
+<div align="center">
+
 # 🌙 나를 소개하는 웹페이지 처음부터 만들기
 
-**미션**: B1-1 · 나를 소개하는 웹페이지 처음부터 만들기
-외부 라이브러리 없이 순수 HTML/CSS/JavaScript로 완성한 반응형 개인 포트폴리오입니다.
+### 순수 HTML/CSS/JavaScript로 구현한 반응형 포트폴리오 · GitHub API 연동 · 다크모드 지원
 
 ![Framework](https://img.shields.io/badge/Framework-None_(Vanilla)-333333?style=flat-square) ![Browser](https://img.shields.io/badge/Browser-Chrome_(latest)-4285F4?style=flat-square&logo=googlechrome&logoColor=white) ![Deploy](https://img.shields.io/badge/Deploy-GitHub_Pages-222222?style=flat-square&logo=github&logoColor=white)
+
+</div>
+
+> 프레임워크 없이 "사용자 이벤트 → 상태 변경 → 화면 업데이트"가 어떻게 이어지는지, 그 기초를 직접 손으로 확인하는 것을 목표로 구현했습니다.
+
+**미션**: B1-1 · 나를 소개하는 웹페이지 처음부터 만들기
 
 ## 개발 환경
 - 에디터: VS Code + Live Server 확장
