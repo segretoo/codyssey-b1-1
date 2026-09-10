@@ -22,30 +22,41 @@ const state = {
 /* =========================================================
    1) 다크 모드 토글 (상태 → 렌더링 흐름 #1)
    테마 상태가 바뀌면 data-theme 속성이 바뀌고, 그 속성을 CSS 변수가 읽어
-   전체 화면 스타일이 함께 바뀐다. 상태는 localStorage에 저장되어 유지된다.
+   전체 화면 스타일이 함께 바뀐다.
+   - 사용자가 토글을 직접 누른 적이 없으면: 시스템 설정을 계속 실시간으로 따라간다
+     (보너스: 시스템 다크모드 "감지" — 한 번만 확인하는 게 아니라 바뀔 때마다 반영)
+   - 사용자가 토글을 한 번이라도 누르면: 그 선택을 localStorage에 저장하고,
+     그 뒤로는 시스템 설정이 바뀌어도 사용자가 고른 값을 그대로 유지한다
 ========================================================= */
 const themeToggle = document.getElementById("themeToggle");
 const root = document.documentElement;
+const THEME_STORAGE_KEY = "theme";
+const systemThemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
-function getInitialTheme() {
-  const saved = localStorage.getItem("theme");
-  if (saved === "dark" || saved === "light") return saved;
-  // 저장된 값이 없으면 시스템 설정을 감지한다 (보너스: 시스템 다크모드 감지)
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+function getSystemTheme() {
+  return systemThemeQuery.matches ? "dark" : "light";
 }
 
 function applyTheme(theme) {
   state.theme = theme;
   root.setAttribute("data-theme", theme);
   themeToggle.setAttribute("aria-pressed", String(theme === "dark"));
-  localStorage.setItem("theme", theme);
 }
 
-applyTheme(getInitialTheme());
+const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+applyTheme(savedTheme === "dark" || savedTheme === "light" ? savedTheme : getSystemTheme());
 
 themeToggle.addEventListener("click", () => {
   const next = state.theme === "dark" ? "light" : "dark";
   applyTheme(next);
+  localStorage.setItem(THEME_STORAGE_KEY, next); // 여기서만 저장 = "사용자가 직접 골랐다"는 표시
+});
+
+// 시스템 설정이 바뀔 때: 사용자가 아직 직접 고른 적 없으면(저장된 값이 없으면) 바로 반영
+systemThemeQuery.addEventListener("change", (event) => {
+  if (localStorage.getItem(THEME_STORAGE_KEY) === null) {
+    applyTheme(event.matches ? "dark" : "light");
+  }
 });
 
 /* =========================================================
