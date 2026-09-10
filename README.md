@@ -1,7 +1,9 @@
-# 🌙 김문정 — Build Log
+# 🌙 나를 소개하는 웹페이지 처음부터 만들기
 
 **미션**: B1-1 · 나를 소개하는 웹페이지 처음부터 만들기
 외부 라이브러리 없이 순수 HTML/CSS/JavaScript로 완성한 반응형 개인 포트폴리오입니다.
+
+![Framework](https://img.shields.io/badge/Framework-None_(Vanilla)-333333?style=flat-square) ![Browser](https://img.shields.io/badge/Browser-Chrome_(latest)-4285F4?style=flat-square&logo=googlechrome&logoColor=white) ![Deploy](https://img.shields.io/badge/Deploy-GitHub_Pages-222222?style=flat-square&logo=github&logoColor=white)
 
 ## 개발 환경
 - 에디터: VS Code + Live Server 확장
