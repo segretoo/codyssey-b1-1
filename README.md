@@ -83,6 +83,13 @@ cd codyssey-b1-1
 - **Flexbox**: 네비게이션, 히어로 버튼 그룹, Contact 폼, Footer
 - **Grid**: Skills 카드, Projects 카드(`repeat(auto-fit, minmax(340px,1fr))`), About
 
+**Q. DOM이란 무엇이고, 어떻게 조작하나요?**
+DOM(Document Object Model)은 **HTML을 브라우저가 메모리에 만든 트리 구조**입니다. `document.getElementById`/`querySelector`로 이 트리에서 요소를 찾고, 그 요소를 바꾸면 화면이 즉시 다시 그려집니다.
+
+- `getElementById("themeToggle")`처럼 id로 요소 하나를 찾는다
+- 찾은 요소에 `classList.add/remove/toggle`, `textContent`, `innerHTML` 등으로 상태를 반영한다
+- HTML 파일 자체를 고치는 게 아니라, 브라우저 메모리 속 DOM을 고치는 것
+
 **Q. querySelector + addEventListener는 어떻게 연결되나요?**
 HTML에는 **`onclick`을 전혀 쓰지 않고**, JS 파일에서 요소를 선택해 이벤트를 연결합니다.
 
@@ -91,25 +98,26 @@ HTML에는 **`onclick`을 전혀 쓰지 않고**, JS 파일에서 요소를 선�
 - 필요하면 리스너를 여러 개 추가하거나, `removeEventListener`로 제거 가능
 
 **Q. 화살표 함수 · 구조분해 할당 · map/filter는 어디에 쓰였나요?**
-**GitHub 데이터를 화면에 맞는 형태로 변환**하는 데 씁니다.
+**GitHub에서 받은 데이터를 화면에 맞는 형태로 단계별로 변환**하는 데 씁니다.
 
 - 구조분해 할당: `const { name, html_url, ... } = repo` — 필요한 값만 꺼냄
-- `map`: `repos.map(createProjectCard)` — 저장소 객체 배열 → 카드 DOM 배열로 변환
-- `filter`: `allRepos.filter(repo => repo.language === lang)` — 조건에 맞는 것만 골라냄
+- `map`: `repos.map(createProjectCard)` — 저장소 객체 배열 → 카드 DOM 요소 배열로 변환 (원본은 그대로 둠)
+- `forEach`: 변환된 카드 배열을 화면(`projectsGrid`)에 하나씩 붙임
+- `filter`: `allRepos.filter(repo => repo.language === lang)` — 언어 필터 클릭 시 조건에 맞는 것만 골라 위 과정을 반복
 
 **Q. fetch + async/await로 로딩/성공/실패를 어떻게 표현했나요?**
 **`try`/`catch` 하나로 네트워크 실패와 HTTP 에러를 모두 처리**합니다.
 
 - `async function loadRepos()` 안에서 `fetch`를 `await`로 기다림
-- `response.ok`가 `false`면 직접 `Error`를 `throw`
+- `fetch`는 404/403 같은 HTTP 에러여도 자동으로 실패 처리되지 않기 때문에, `response.ok`를 직접 확인해서 `false`면 직접 `Error`를 `throw`함
 - 로딩 중 → 스피너 / 성공 → 카드 리스트 / 실패 → 에러+재시도 버튼 / 결과 없음 → 빈 상태 메시지
 
 **Q. 이벤트 → 상태 변경 → DOM 업데이트 흐름을 다크모드로 설명하면?**
-**속성 하나(`data-theme`)만 바꾸면 CSS가 나머지 색상을 전부 처리**합니다.
+**"어떤 테마로 할지 결정"과 "그 테마를 화면에 적용"을 분리**한 구조입니다.
 
-- ① `themeToggle` 클릭 (이벤트)
-- ② `state.theme`을 바꾸고 `applyTheme()` 호출 (상태 변경)
-- ③ `root.setAttribute('data-theme', theme)` → `[data-theme="dark"]` CSS 규칙이 켜지며 화면 전체 색 전환 (DOM 업데이트)
+- **결정**: `localStorage`에 저장된 값이 있으면 그 값, 없으면 `getSystemTheme()`으로 시스템 설정을 확인
+- **적용**: 결정된 값을 `applyTheme()`에 넘기면 `root.setAttribute('data-theme', theme)`로 `<html>` 속성이 바뀌고, CSS의 `[data-theme="dark"]` 규칙이 켜지며 화면 전체 색이 전환됨 (DOM 업데이트)
+- **화면 업데이트가 일어나는 시점(트리거) 3가지**: ① 페이지 최초 로드 ② 토글 클릭(이때만 `localStorage.setItem`으로 저장) ③ 시스템 설정 변경(단, 사용자가 직접 고른 적 없을 때만)
 
 이 구조가 React의 `useState` → 리렌더링 흐름으로 그대로 이어집니다.
 
@@ -153,6 +161,7 @@ React를 배우기 전에 "상태가 바뀌면 화면이 다시 그려진다"는
 ## 참고
 - `images/profile.svg`는 실제 프로필 사진이 없을 때를 위한 이니셜 아바타입니다. 실제 사진으로 교체하려면 같은 파일명(`images/profile.svg` → 예: `profile.jpg`)으로 넣고 `index.html`의 `<img src>` 경로만 바꿔주면 됩니다.
 - GitHub API는 비인증 호출 시 시간당 60회 제한이 있습니다. 반복 새로고침을 피하고, 403 응답을 받으면 에러 상태 UI(재시도 버튼)가 표시됩니다.
+- 빈 상태 UI는 브라우저 콘솔에서 `state.allRepos = []; renderRepos([]);`를 실행하면 바로 확인할 수 있습니다.
 
 ## 폼 실제 전송 (EmailJS, 보너스)
 `js/main.js`에 연동 코드가 들어있습니다. [emailjs.com](https://www.emailjs.com)에서 무료 계정을 만들고 Service ID / Template ID / Public Key를 발급받아 `js/main.js` 상단 세 값에 넣으면 실제 이메일 전송이 활성화됩니다 (값 교체 전엔 화면에만 성공 메시지가 뜨는 로컬 모드로 동작). 템플릿은 기본 제공 "Contact Us"를 쓰면 되고, 코드가 그 변수명(`{{name}}`, `{{email}}`, `{{title}}`, `{{message}}`)에 맞춰져 있습니다.
