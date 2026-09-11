@@ -402,9 +402,9 @@ loadRepos();
    2) 아래 세 값을 본인 계정 값으로 교체
    교체 전에는 값이 플레이스홀더 그대로라 emailjs.send를 호출하지 않고
    기존처럼 화면에만 성공 메시지를 보여준다 (기능은 그대로 동작) */
-const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
-const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
-const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+const EMAILJS_PUBLIC_KEY = "rW_D77L2nHdrWtpl1";
+const EMAILJS_SERVICE_ID = "service_03jgr2e";
+const EMAILJS_TEMPLATE_ID = "template_ovh2ite";
 const EMAILJS_CONFIGURED =
   typeof emailjs !== "undefined" &&
   ![EMAILJS_PUBLIC_KEY, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID].some((v) => v.startsWith("YOUR_"));
