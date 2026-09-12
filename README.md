@@ -84,14 +84,14 @@ cd codyssey-b1-1
 - **Grid**: Skills 카드, Projects 카드(`repeat(auto-fit, minmax(340px,1fr))`), About
 
 **Q. DOM이란 무엇이고, 어떻게 조작하나요?**
-DOM(Document Object Model)은 **HTML을 브라우저가 메모리에 만든 트리 구조**입니다. `document.getElementById`/`querySelector`로 이 트리에서 요소를 찾고, 그 요소를 바꾸면 화면이 즉시 다시 그려집니다.
+**HTML을 브라우저가 메모리에 만든 트리 구조**가 DOM(Document Object Model)입니다. `getElementById`/`querySelector`로 이 트리에서 요소를 찾고, 그 요소를 바꾸면 화면이 즉시 다시 그려집니다.
 
 - `getElementById("themeToggle")`처럼 id로 요소 하나를 찾는다
 - 찾은 요소에 `classList.add/remove/toggle`, `textContent`, `innerHTML` 등으로 상태를 반영한다
 - HTML 파일 자체를 고치는 게 아니라, 브라우저 메모리 속 DOM을 고치는 것
 
 **Q. querySelector + addEventListener는 어떻게 연결되나요?**
-HTML에는 **`onclick`을 전혀 쓰지 않고**, JS 파일에서 요소를 선택해 이벤트를 연결합니다.
+**HTML엔 `onclick`을 전혀 쓰지 않고, JS 파일에서만 요소를 찾아 이벤트를 연결**합니다.
 
 - `querySelector`(`All`)로 DOM 요소를 찾는다
 - `addEventListener`로 이벤트를 붙인다 — 구조(HTML)와 동작(JS)이 분리됨
